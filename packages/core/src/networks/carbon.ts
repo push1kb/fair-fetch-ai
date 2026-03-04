@@ -1,4 +1,7 @@
-import type { AdData, AdNetworkDetection, AdNetworkExtractor } from "../types.js";
+import { Effect, pipe } from "effect";
+import { HttpClient } from "effect/unstable/http";
+import { AdFetchError, AdParseError } from "../errors.js";
+import type { AdData, AdNetworkDetection, AdNetworkExtractorEffect } from "../types.js";
 
 const SCRIPT_TAG_RE =
 	/cdn\.carbonads\.com\/carbon\.js\?serve=([A-Z0-9]+)&placement=([a-z0-9]+)/;
@@ -16,32 +19,43 @@ interface CarbonAdResponse {
 	fallbackOptimizePlacementId?: string;
 }
 
-async function fetchCarbonZone(
+function fetchCarbonZone(
 	serve: string,
 	placement: string,
-): Promise<CarbonAdResponse | null> {
+): Effect.Effect<CarbonAdResponse | null, AdFetchError | AdParseError, HttpClient.HttpClient> {
 	const url = `https://srv.carbonads.net/ads/${serve}.json?segment=placement:${placement}`;
-	const res = await globalThis.fetch(url);
-	if (!res.ok) return null;
-	const json = await res.json();
-	return json.ads?.[0] ?? null;
+	return pipe(
+		HttpClient.get(url),
+		Effect.mapError((err) => new AdFetchError({ network: "Carbon", reason: err })),
+		Effect.flatMap((res) =>
+			res.status >= 200 && res.status < 300
+				? pipe(
+						res.json,
+						Effect.mapError((err) => new AdParseError({ network: "Carbon", reason: err })),
+					)
+				: Effect.succeed(null as unknown),
+		),
+		Effect.map((json: any) => (json?.ads?.[0] as CarbonAdResponse) ?? null),
+	);
 }
 
-async function fetchCarbonAd(
+function fetchCarbonAd(
 	serve: string,
 	placement: string,
-): Promise<CarbonAdResponse | null> {
-	const ad = await fetchCarbonZone(serve, placement);
-	if (!ad) return null;
-	// If the zone has a filled ad with statlink, use it directly
-	if (ad.statlink) return ad;
-	// Otherwise try the fallback zone (same as Carbon's client-side logic)
-	const fallbackKey = ad.fallbackZoneKey || FALLBACK_ZONE;
-	if (fallbackKey === serve) return null;
-	return fetchCarbonZone(fallbackKey, placement);
+): Effect.Effect<CarbonAdResponse | null, AdFetchError | AdParseError, HttpClient.HttpClient> {
+	return pipe(
+		fetchCarbonZone(serve, placement),
+		Effect.flatMap((ad) => {
+			if (!ad) return Effect.succeed(null);
+			if (ad.statlink) return Effect.succeed(ad);
+			const fallbackKey = ad.fallbackZoneKey || FALLBACK_ZONE;
+			if (fallbackKey === serve) return Effect.succeed(null);
+			return fetchCarbonZone(fallbackKey, placement);
+		}),
+	);
 }
 
-export const carbon: AdNetworkExtractor = {
+export const carbon: AdNetworkExtractorEffect = {
 	name: "Carbon",
 
 	detect(html: string): AdNetworkDetection | null {
@@ -53,17 +67,22 @@ export const carbon: AdNetworkExtractor = {
 		};
 	},
 
-	async fetch(detection: AdNetworkDetection): Promise<AdData | null> {
+	fetch(detection: AdNetworkDetection) {
 		const { serve, placement } = detection.params;
-		const ad = await fetchCarbonAd(serve, placement);
-		if (!ad) return null;
-		return {
-			kind: "ad",
-			description: ad.description ?? ad.company ?? "Ad",
-			url: ad.statlink ?? "",
-			company: ad.company ?? "",
-			image: ad.smallImage,
-			network: "Carbon",
-		};
+		return pipe(
+			fetchCarbonAd(serve, placement),
+			Effect.map((ad): AdData | null =>
+				ad
+					? {
+							kind: "ad",
+							description: ad.description ?? ad.company ?? "Ad",
+							url: ad.statlink ?? "",
+							company: ad.company ?? "",
+							image: ad.smallImage,
+							network: "Carbon",
+						}
+					: null,
+			),
+		);
 	},
 };

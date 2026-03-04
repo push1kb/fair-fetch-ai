@@ -1,8 +1,9 @@
-import type { AdData, AdNetworkDetection, AdNetworkExtractor } from "../types.js";
+import { Effect } from "effect";
+import type { AdData, AdNetworkDetection, AdNetworkExtractorEffect } from "../types.js";
 
 const SPONSORS_URL_RE = /https?:\/\/github\.com\/sponsors\/([a-zA-Z0-9_-]+)/;
 
-export const githubSponsors: AdNetworkExtractor = {
+export const githubSponsors: AdNetworkExtractorEffect = {
 	name: "GitHub Sponsors",
 
 	detect(html: string): AdNetworkDetection | null {
@@ -14,14 +15,14 @@ export const githubSponsors: AdNetworkExtractor = {
 		};
 	},
 
-	async fetch(detection: AdNetworkDetection): Promise<AdData | null> {
+	fetch(detection: AdNetworkDetection) {
 		const { username, url } = detection.params;
-		return {
+		return Effect.succeed<AdData>({
 			kind: "sponsor",
 			description: `Support @${username} on GitHub Sponsors`,
 			url,
 			company: username,
 			network: "GitHub Sponsors",
-		};
+		});
 	},
 };

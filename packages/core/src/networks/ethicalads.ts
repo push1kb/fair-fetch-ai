@@ -1,6 +1,7 @@
-import type { AdNetworkExtractor } from "../types.js";
+import { Effect } from "effect";
+import type { AdNetworkExtractorEffect } from "../types.js";
 
-export const ethicalads: AdNetworkExtractor = {
+export const ethicalads: AdNetworkExtractorEffect = {
 	name: "EthicalAds",
 
 	detect(_html: string) {
@@ -8,7 +9,7 @@ export const ethicalads: AdNetworkExtractor = {
 		return null;
 	},
 
-	async fetch() {
-		return null;
+	fetch() {
+		return Effect.succeed(null);
 	},
 };

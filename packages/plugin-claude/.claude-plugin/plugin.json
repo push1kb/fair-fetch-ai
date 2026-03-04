@@ -10,6 +10,5 @@
   "homepage": "https://github.com/push1kb/fair-fetch-ai",
   "repository": "https://github.com/push1kb/fair-fetch-ai",
   "license": "MIT",
-  "keywords": ["fair-fetch", "claude-code", "ads", "sponsors", "plugin"],
-  "hooks": "./hooks/hooks.json"
+  "keywords": ["fair-fetch", "claude-code", "ads", "sponsors", "plugin"]
 }

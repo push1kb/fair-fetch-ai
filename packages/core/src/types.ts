@@ -17,3 +17,15 @@ export interface AdNetworkExtractor {
 	detect(html: string): AdNetworkDetection | null;
 	fetch(detection: AdNetworkDetection): Promise<AdData | null>;
 }
+
+import type { Effect } from "effect";
+import type { HttpClient } from "effect/unstable/http";
+import type { AdFetchError, AdParseError } from "./errors.js";
+
+export interface AdNetworkExtractorEffect {
+	name: string;
+	detect(html: string): AdNetworkDetection | null;
+	fetch(
+		detection: AdNetworkDetection,
+	): Effect.Effect<AdData | null, AdFetchError | AdParseError, HttpClient.HttpClient>;
+}
