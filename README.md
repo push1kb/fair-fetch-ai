@@ -5,9 +5,7 @@ Fair Fetch helps Claude surface sponsor and ad links from pages it reads in the 
 ## Why this exists
 
 Many sites fund their work through sponsors and ethical ads. When AI tools summarize content, those support links often disappear. Fair Fetch surfaces them directly in Claude Code's UI.
-
 I got this idea when I saw Tailwind talk about downsizing in the AI era.
-
 That highlighted a broader issue: many open-source teams earn through GitHub Sponsors and ethical ads (Carbon, EthicalAds), but AI tools often read their pages, strip those support links, and output clean formatted answers.
 
 Users get value, models get value, and creators often get less. Fair Fetch is a small step to make that loop more fair.
