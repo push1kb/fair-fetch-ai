@@ -20,8 +20,15 @@ Many sites fund their work through sponsors and ethical ads. When AI tools summa
 
 ## Install in Claude Code
 
+### Official Claude Directory (Pending Approval)
+
+Fair Fetch has been submitted for review and is not yet available in the official directory.
+
+### via GitHub Marketplace
+
 ```bash
-/plugin install /fair-fetch
+claude plugin marketplace add push1kb/fair-fetch-ai
+claude plugin install fair-fetch@fair-fetch
 ```
 
 ## How it looks
