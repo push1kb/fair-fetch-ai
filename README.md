@@ -20,16 +20,8 @@ Many sites fund their work through sponsors and ethical ads. When AI tools summa
 
 ## Install in Claude Code
 
-1. Add the marketplace:
-
 ```bash
-/plugin marketplace add push1kb/fair-fetch-ai
-```
-
-2. Install the plugin:
-
-```bash
-/plugin install fair-fetch@fair-fetch-ai
+/plugin install /fair-fetch
 ```
 
 ## How it looks
