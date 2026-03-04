@@ -45,15 +45,11 @@ When Fair Fetch detects support signals, you see messages such as:
 - Processes the fetched page URL for known sponsor/ad patterns
 - Displays short sponsor/ad notices in the UI only when relevant signals are found
 
-## Status
+## Roadmap
 
-- Repository: Monorepo (`fair-fetch`)
-- Claude plugin: Done
-- Codex plugin: Next
-- Claude plugin name: `fair-fetch`
-- Version: `0.1.0`
-- Author: Vijay Pushkin
+- [x] Claude plugin
+- [ ] Codex plugin
 
 ## License
 
-MIT. See [LICENSE](/Users/pushkin/Developer/Code/push1kb/plugins/ethical-fetch/LICENSE).
+MIT. See [LICENSE](./LICENSE).
