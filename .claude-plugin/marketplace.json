@@ -1,0 +1,18 @@
+{
+  "name": "fair-fetch",
+  "owner": {
+    "name": "Vijay Pushkin",
+    "email": "a.vijaypushkin@gmail.com",
+    "url": "https://github.com/push1kb"
+  },
+  "metadata": {
+    "description": "Fair Fetch helps Claude surface sponsor and ad links from pages it reads in the UI, so creators and open-source projects get visibility without adding extra context tokens."
+  },
+  "plugins": [
+    {
+      "name": "fair-fetch",
+      "source": "./packages/plugin-claude",
+      "description": "adds /fair-fetch to show ad links from pages Claude reads"
+    }
+  ]
+}

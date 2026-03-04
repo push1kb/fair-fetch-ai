@@ -1,5 +1,15 @@
 {
   "name": "fair-fetch",
   "description": "Surfaces sponsor links and ads from websites fetched by Claude Code, supporting developers who monetize via ad networks.",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "author": {
+    "name": "Vijay Pushkin",
+    "email": "a.vijaypushkin@gmail.com",
+    "url": "https://github.com/push1kb"
+  },
+  "homepage": "https://github.com/push1kb/fair-fetch-ai",
+  "repository": "https://github.com/push1kb/fair-fetch-ai",
+  "license": "MIT",
+  "keywords": ["fair-fetch", "claude-code", "ads", "sponsors", "plugin"],
+  "hooks": "./hooks/hooks.json"
 }
