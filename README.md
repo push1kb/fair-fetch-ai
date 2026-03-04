@@ -39,6 +39,8 @@ When Fair Fetch detects support signals, you see messages such as:
 - Activates only when Claude invokes `WebFetch` or `WebSearch`
 - Displays short sponsor/ad notices in the UI only when relevant signals are found
 
+Claude Privacy policy: [PRIVACY-CLAUDE.md](./PRIVACY-CLAUDE.md)
+
 ## Roadmap
 
 - [x] Claude plugin
