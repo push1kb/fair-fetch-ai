@@ -41,8 +41,10 @@ When Fair Fetch detects support signals, you see messages such as:
 
 ## Privacy and behavior
 
-- Runs only when Claude invokes `WebFetch` or `WebSearch`
-- Processes the fetched page URL for known sponsor/ad patterns
+- Runs locally on the user's machine through Claude Code hooks
+- Collects no user data and sends no analytics or telemetry
+- Processes only the current fetched URL to detect known sponsor/ad patterns
+- Activates only when Claude invokes `WebFetch` or `WebSearch`
 - Displays short sponsor/ad notices in the UI only when relevant signals are found
 
 ## Roadmap
