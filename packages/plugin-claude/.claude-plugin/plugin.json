@@ -1,0 +1,5 @@
+{
+  "name": "fair-fetch",
+  "description": "Surfaces sponsor links and ads from websites fetched by Claude Code, supporting developers who monetize via ad networks.",
+  "version": "0.1.0"
+}

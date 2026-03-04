@@ -1,0 +1,15 @@
+{
+  "name": "@push1kb/fair-fetch-plugin-claude",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@push1kb/fair-fetch-core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
+  }
+}
