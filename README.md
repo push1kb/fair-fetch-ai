@@ -32,7 +32,7 @@ Fair Fetch has been submitted for review and is not yet available in the officia
 
 ```bash
 claude plugin marketplace add push1kb/fair-fetch-ai
-claude plugin install fair-fetch@fair-fetch
+claude plugin install fair-fetch@push1kb
 ```
 
 ## How it looks
