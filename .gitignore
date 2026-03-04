@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Build outputs
+packages/plugin-claude/scripts/post-fetch.js
+packages/plugin-codex/dist/
