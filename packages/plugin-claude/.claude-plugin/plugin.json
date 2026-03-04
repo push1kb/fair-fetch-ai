@@ -1,7 +1,7 @@
 {
   "name": "fair-fetch",
   "description": "Surfaces sponsor links and ads from websites fetched by Claude Code, supporting developers who monetize via ad networks.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Vijay Pushkin",
     "email": "a.vijaypushkin@gmail.com",
